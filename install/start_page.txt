@@ -1,0 +1,9 @@
+body {
+  background-image: url('../../../images/autobackgroundrotation_start-page.jpg');/* Custom line */
+  background-size: cover; /*Custom Line*/
+  background-attachment: fixed; /*Custom Line*/
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.231;
+  padding: 0;
+}

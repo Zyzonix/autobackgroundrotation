@@ -1,0 +1,10 @@
+body, html {
+    background-image: url('../../images/autobackgroundrotation_ticket-overview.jpg'); /*Custom Line - automatically edited by background-rotation-osticket*/
+    background-size: cover; /*Custom Line*/
+    background-attachment: fixed; /*Custom Line*/
+    background-color: #224077; /*Custom Line*/
+    color:#000;
+    font-size:14px;
+    margin:0;
+    padding:0;
+}
