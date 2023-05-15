@@ -13,6 +13,9 @@ This script is able to change backgrounds of osTicket and samba-domain-system ei
 - Included logging feature
 - Automatically restart php and httpd (in case of using the osTicket plugin)
 
+## Optional settings for osTicket
+It is recommended to add ```text-shadow: 0px 0px 4px black;``` to the ```#footer```-section of ```upload/scp/css/scp.css``` and ```upload/assets/default/css/theme.css``` to make the footer readable independent from the current background. The install-script doesn't includes this feature yet.
+
 ## Installation
 Firstly clone this repository (recommended to ```/srv/```)
 ```
