@@ -9,7 +9,7 @@
 # 
 # file          | install.sh
 # project       | autobackgroundrotation
-# file version  | 1.0.0
+# file version  | 1.0.1
 #
 
 echo "######################################################"
@@ -71,7 +71,7 @@ echo "Installing crontab under " $CRONFILE
 touch $CRONFILE
 echo "05 *    * * *   root    /usr/bin/python3 $MAINDIR/main/core.py" >> $CRONFILE
 
-printf "%s " "Please enter the command to restart HTTPD (like /usr/bin/rc-service httpd restart):"
+printf "%s " "Please enter the command to restart HTTPD (like /usr/bin/rc-service httpd restart or /usr/bin/systemctl restart apache2 (Debian)):"
 read HTTPDCOMMAND
 HTTPDOLD='httpd_restart_command='
 echo "Setting to "$HTTPDCOMMAND
@@ -79,7 +79,7 @@ read -p "Correct? y / n : " CONFIRM
 if [ "$CONFIRM" != "y" ]; then exit; fi
 sed -i "s+$HTTPDOLD.*+$HTTPDOLD$HTTPDCOMMAND+" $CONFIGPATH
 
-printf "%s " "Please enter the command to restart PHP (like /usr/bin/rc-service php-fpm7 restart):"
+printf "%s " "Please enter the command to restart PHP (like /usr/bin/rc-service php-fpm7 restart (Debian: leave empty)):"
 read PHPCOMMAND
 PHPOLD='php_restart_command='
 echo "Setting to "$PHPCOMMAND
@@ -133,6 +133,16 @@ then
         OSTICKETPATH="/srv/osticket"
     fi
 
+    # request owner of images
+    printf "%s " "Please enter the user and group for the http/apache service (apache2: www-data:users, httpd: http:http):"
+    read OWNER_OF_IMAGES
+    OWNER_OF_IMAGES_OLD='owner_of_images = '
+    OWNER_OF_IMAGES_NEW=$OWNER_OF_IMAGES_OLD'"'$OWNER_OF_IMAGES'"'
+    echo "Setting to "$OWNER_OF_IMAGES
+    read -p "Correct? y / n : " CONFIRM
+    if [ "$CONFIRM" != "y" ]; then exit; fi
+    sed -i "s+$OWNER_OF_IMAGES_OLD.*+$OWNER_OF_IMAGES_NEW+" /srv/ext-stor/autobackgroundrotation/main/plugins/osticket.py
+
     echo ""
     echo "Feel free to change those values in config.ini"
     echo ""
@@ -171,5 +181,6 @@ echo "And then select any of the sub dirs, if timedependend changemode"
 echo "is selected any of those subdirs will be used"
 echo ""
 echo "If errors are occurring, check your config.ini"
+echo "Log files are located here: $MAINDIR/logs/ "
 echo "#########################################################"
 echo ""
