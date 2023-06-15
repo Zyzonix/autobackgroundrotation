@@ -34,6 +34,7 @@ Logs are located under ```logs/```.
 
 ## Features coming soon
 - Plugin for samba-domain
+- Images depending on season (summer/winter)
 
 
-Readme version: 1.0
+Readme version: 1.1
