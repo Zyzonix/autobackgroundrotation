@@ -9,14 +9,14 @@
 # 
 # file          | main/plugins/osticket.py
 # project       | autobackgroundrotation
-# file version  | 1.0.0
+# file version  | 1.0.1
 #
 import os
 import traceback
 import subprocess
 
 # var storage
-owner_of_images = "http:http"
+owner_of_images = "www-data:users"
 
 start_page_image_name = "upload/images/autobackgroundrotation_start-page.jpg"
 agent_login_page_image_name = "upload/scp/images/autobackgroundrotation_agent-login.jpg"
