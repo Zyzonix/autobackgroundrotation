@@ -26,9 +26,6 @@ def changeImagePermissions(path):
 def changeImageHTTPD(self, logging, imageFilePath):
     notCompleted = False
 
-    # config file: upload/scp/css/scp.css
-    # path: ../../images/autobackgroundrotation_ticket-overview.jpg
-    # edit scp.css file (background ticketsystem after login) if enabled
     try:    
         destination_path = self.simplehtml_basepath + self.simplehtml_defaultname
         os.system("/usr/bin/cp " + imageFilePath + " " + destination_path)
