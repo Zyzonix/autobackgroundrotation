@@ -53,10 +53,10 @@ mkdir -v $MAINDIR/images/morning
 mkdir -v $MAINDIR/images/midday
 mkdir -v $MAINDIR/images/evening
 mkdir -v $MAINDIR/images/night
-cp $MAINDIR/main/template.jpg $MAINDIR/images/night
-cp $MAINDIR/main/template.jpg $MAINDIR/images/morning
-cp $MAINDIR/main/template.jpg $MAINDIR/images/evening
-cp $MAINDIR/main/template.jpg $MAINDIR/images/midday
+cp $MAINDIR/template.jpg $MAINDIR/images/night
+cp $MAINDIR/template.jpg $MAINDIR/images/morning
+cp $MAINDIR/template.jpg $MAINDIR/images/evening
+cp $MAINDIR/template.jpg $MAINDIR/images/midday
 
 # update config_file in core.py
 OLDCONFIGPATH="config_file = 'config.ini'"
@@ -178,8 +178,11 @@ read -p "Should the simpleHTML plugin be enabled? y / n : " CONFIRM
 if [ "$CONFIRM" != "n" ] 
 then 
     sed -i "s+"simplehtml=".*+simplehtml=true+g" $CONFIGPATH
+    echo ""
+    echo "#### IMPORTANT! ####"
     echo "Please add the base path and the name of the image that should be rotated to config.ini manually."
     echo "Put this information in the [SIMPLEHTML] section of config.ini"
+    echo ""
 fi
 
 echo ""
