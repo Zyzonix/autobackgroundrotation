@@ -17,7 +17,7 @@ This script is able to change backgrounds of osTicket and samba-domain-system ei
 It is recommended to add ```text-shadow: 0px 0px 4px black;``` to the ```#footer```-section of ```upload/scp/css/scp.css``` and ```upload/assets/default/css/theme.css``` to make the footer readable independent from the current background. The install-script doesn't includes this feature yet.
 
 ## Installation
-Firstly clone this repository (recommended to ```/srv/```)
+Firstly clone this repository (required to ```/srv/```!)
 ```
 $ git clone https://github.com/Zyzonix/autobackgroundrotation.git
 ```
