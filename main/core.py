@@ -381,8 +381,8 @@ class core():
     
             try:
                 # backgrounds to change
-                self.simplehtml_basepath = self.cnfgImp["SIMPLEHTML"].getboolean("basepath")
-                self.simplehtml_defaultname = self.cnfgImp["SIMPLEHTML"].getboolean("defaultname")
+                self.simplehtml_basepath = self.cnfgImp["SIMPLEHTML"]["basepath"]
+                self.simplehtml_defaultname = self.cnfgImp["SIMPLEHTML"]["defaultname"]
 
             except:
                 logging.write(self, "ERROR | Failed to load settings for backgrounds for SIMPLEHTML")
@@ -427,7 +427,7 @@ class core():
             self.plugin_simplehtml = self.cnfgImp["PLUGINS"].getboolean("simplehtml")
 
             # if both plugins are enabled
-            if self.plugin_domain is self.plugin_osticket:
+            if self.plugin_domain is self.plugin_osticket is self.plugin_simplehtml:
                 logging.write(self, "ERROR | All plugins are enabled or disabled - please check your config")
                 return
 
