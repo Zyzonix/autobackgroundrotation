@@ -377,6 +377,23 @@ class core():
             
             success = True
 
+        elif self.plugin == 'simplehtml':
+    
+            try:
+                # backgrounds to change
+                self.simplehtml_basepath = self.cnfgImp["SIMPLEHTML"].getboolean("basepath")
+                self.simplehtml_defaultname = self.cnfgImp["SIMPLEHTML"].getboolean("defaultname")
+
+            except:
+                logging.write(self, "ERROR | Failed to load settings for backgrounds for SIMPLEHTML")
+                logging.writeError(self, traceback.format_exc())
+                return
+
+            # import plugin
+            import plugins.simplehtml as simplehtml            
+
+            success = simplehtml.changeImageHTTPD(self, logging, randomSelectedFile)
+
         else:
             logging.write(self, "ERROR | No plugin selected")
             return
@@ -407,15 +424,17 @@ class core():
         try:
             self.plugin_osticket = self.cnfgImp["PLUGINS"].getboolean("osticket")
             self.plugin_domain = self.cnfgImp["PLUGINS"].getboolean("local_domain")
+            self.plugin_simplehtml = self.cnfgImp["PLUGINS"].getboolean("simplehtml")
 
             # if both plugins are enabled
             if self.plugin_domain is self.plugin_osticket:
-                logging.write(self, "ERROR | Both plugins are enabled or disabled - please check your config")
+                logging.write(self, "ERROR | All plugins are enabled or disabled - please check your config")
                 return
 
             # set enabled plugin to global variable
             if self.plugin_osticket: self.plugin = "osticket" 
-            else: self.plugin = "domain"
+            elif self.plugin_domain: self.plugin = "domain"
+            elif self.plugin_simplehtml: self.plugin = "simplehtml"
             logging.write(self, "INFO  | Changing background for '" + self.plugin + "'")
             
         except:

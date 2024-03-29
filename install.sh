@@ -71,22 +71,6 @@ echo "Installing crontab under " $CRONFILE
 touch $CRONFILE
 echo "05 *    * * *   root    /usr/bin/python3 $MAINDIR/main/core.py" >> $CRONFILE
 
-printf "%s " "Please enter the command to restart HTTPD (like /usr/bin/rc-service httpd restart or /usr/bin/systemctl restart apache2 (Debian)):"
-read HTTPDCOMMAND
-HTTPDOLD='httpd_restart_command='
-echo "Setting to "$HTTPDCOMMAND
-read -p "Correct? y / n : " CONFIRM
-if [ "$CONFIRM" != "y" ]; then exit; fi
-sed -i "s+$HTTPDOLD.*+$HTTPDOLD$HTTPDCOMMAND+" $CONFIGPATH
-
-printf "%s " "Please enter the command to restart PHP (like /usr/bin/rc-service php-fpm7 restart (Debian: leave empty)):"
-read PHPCOMMAND
-PHPOLD='php_restart_command='
-echo "Setting to "$PHPCOMMAND
-read -p "Correct? y / n : " CONFIRM
-if [ "$CONFIRM" != "y" ]; then exit; fi
-sed -i "s+$PHPOLD.*+$PHPOLD$PHPCOMMAND+" $CONFIGPATH
-
 read -p "Should the image rotation be daytime based? y / n : " CONFIRM
 if [ "$CONFIRM" != "y" ] 
 then 
@@ -101,6 +85,23 @@ fi
 read -p "Should the osTicket plugin be enabled? y / n : " CONFIRM
 if [ "$CONFIRM" != "n" ] 
 then 
+
+    printf "%s " "Please enter the command to restart HTTPD (like /usr/bin/rc-service httpd restart or /usr/bin/systemctl restart apache2 (Debian)):"
+    read HTTPDCOMMAND
+    HTTPDOLD='httpd_restart_command='
+    echo "Setting to "$HTTPDCOMMAND
+    read -p "Correct? y / n : " CONFIRM
+    if [ "$CONFIRM" != "y" ]; then exit; fi
+    sed -i "s+$HTTPDOLD.*+$HTTPDOLD$HTTPDCOMMAND+" $CONFIGPATH
+
+    printf "%s " "Please enter the command to restart PHP (like /usr/bin/rc-service php-fpm7 restart (Debian: leave empty)):"
+    read PHPCOMMAND
+    PHPOLD='php_restart_command='
+    echo "Setting to "$PHPCOMMAND
+    read -p "Correct? y / n : " CONFIRM
+    if [ "$CONFIRM" != "y" ]; then exit; fi
+    sed -i "s+$PHPOLD.*+$PHPOLD$PHPCOMMAND+" $CONFIGPATH
+
     sed -i "s+"osticket=".*+osticket=true+g" $CONFIGPATH
     read -p "Automatically change background of start page? y / n : " CONFIRM
     if [ "$CONFIRM" != "n" ] 
@@ -141,7 +142,7 @@ then
     echo "Setting to "$OWNER_OF_IMAGES
     read -p "Correct? y / n : " CONFIRM
     if [ "$CONFIRM" != "y" ]; then exit; fi
-    sed -i "s+$OWNER_OF_IMAGES_OLD.*+$OWNER_OF_IMAGES_NEW+" /srv/ext-stor/autobackgroundrotation/main/plugins/osticket.py
+    sed -i "s+$OWNER_OF_IMAGES_OLD.*+$OWNER_OF_IMAGES_NEW+" $MAINDIR/main/plugins/osticket.py
 
     echo ""
     echo "Feel free to change those values in config.ini"
@@ -171,6 +172,14 @@ if [ "$CONFIRM" != "n" ]
 then 
     sed -i "s+"local_domain=".*+local_domain=true+g" $CONFIGPATH
     echo "This plugin hasn't been developed yet"
+fi
+
+read -p "Should the simpleHTML plugin be enabled? y / n : " CONFIRM
+if [ "$CONFIRM" != "n" ] 
+then 
+    sed -i "s+"simplehtml=".*+simplehtml=true+g" $CONFIGPATH
+    echo "Please add the base path and the name of the image that should be rotated to config.ini manually."
+    echo "Put this information in the [SIMPLEHTML] section of config.ini"
 fi
 
 echo ""

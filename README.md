@@ -32,9 +32,20 @@ The installation script can be executed more than one time (if not completed on 
 Configuration under ```config.ini```.
 Logs are located under ```logs/```.
 
+## Use cases
+This script can be used in the following use cases:
+- background rotation of all OSTicket web pages
+- rotation of any web page background, that is hosted on an Apache webserver (```apache2``` or ```httpd```)
+
+### OSTicket
+The OSTicket plugin rotates the background image of OSTickets start, login and ticket pages. To setup, provide the default installation directory of OSTicket, the command to restart Apache (depends on your system) and the command to restart php. To only rotate a specific e.g. the background image of the ticket page, just en-/disable the other images in the ```OSTICKET``` section in the config file.
+
+### simpleHTML
+In your HTML code set an image as background, then add the default path to the image directory to the config file, also add the name of the image. When all settings are correct and images can be found, this script will automatically rotate the image. There is no additional restart after rotation of Apache required!
+
 ## Features coming soon
 - Plugin for samba-domain
 - Images depending on season (summer/winter)
 
 
-Readme version: 1.1
+Readme version: 1.2
